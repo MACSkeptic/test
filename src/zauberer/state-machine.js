@@ -29,6 +29,7 @@ const quest = {
 const colour = {
   on: {
     back: 'quest',
+    abandon: 'name',
     submit: {
       'success': { cond: conditions.valid },
       'failure': { cond: conditions.invalid }

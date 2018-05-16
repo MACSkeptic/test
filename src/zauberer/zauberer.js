@@ -1,14 +1,8 @@
 import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { machineConfiguration, machine } from './state-machine';
-import Bridge from './bridge';
 import { Grid, Page } from '@janus.team/janus-particles';
-import Success from './success';
-import Failure from './failure';
-import Step1 from './step-1';
-import Step2 from './step-2';
-import Step3 from './step-3';
-import Prism from './prism';
+import { Prism, Success, Failure, Bridge, Step1, Step2, Step3 } from '../shared';
 import Graph from './graph';
 
 export const Zauberer = ({ machine, ...rest }) => ({
@@ -61,6 +55,7 @@ export class State extends Component {
   onSubmit = _.partial(this.transitionPreventingDefault, 'submit');
   onBack = _.partial(this.transitionPreventingDefault, 'back');
   onCancel = _.partial(this.transitionPreventingDefault, 'cancel');
+  onAbandon = _.partial(this.transitionPreventingDefault, 'abandon');
   render = () => (
     <Page>
       <Page.Main>
@@ -71,7 +66,7 @@ export class State extends Component {
           <Page.MainBodySection title={`step: ${this.state.machine.value.zauberer}`}>
             <Zauberer
               {...this.state}
-              {..._.pick(this, ['onChange', 'onCancel', 'onSubmit', 'onBack'])}
+              {..._.pick(this, ['onChange', 'onCancel', 'onSubmit', 'onBack', 'onAbandon'])}
             />
           </Page.MainBodySection>
           <Debugger {...this.state} />

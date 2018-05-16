@@ -3,7 +3,7 @@ import React from 'react';
 import { Form, Button } from '@janus.team/janus-particles';
 import { actions } from './actions';
 
-const Step3 = ({ onSubmit, onChange, data: { colour }, ...actionHandlers }) => (
+const Step3 = ({ onSubmit, onChange, onAbandon, data: { colour }, ...actionHandlers }) => (
   <Form onSubmit={onSubmit}>
     <Form.Group label="What is your favourite colour?">
       <Form.Input
@@ -32,6 +32,10 @@ const Step3 = ({ onSubmit, onChange, data: { colour }, ...actionHandlers }) => (
       />
     </Form.Group>
     {actions(actionHandlers)}
+    <br />
+    <Button onClick={onAbandon} primary type="button">
+      Hey! I&apos;ve got a great idea. Why doesn&apos;t Launcelot go?
+    </Button>
   </Form>
 );
 
