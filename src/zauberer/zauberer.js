@@ -53,7 +53,7 @@ export class State extends Component {
     _.invoke(browserEvent, 'preventDefault'),
     this.transition(stateMachineTransitionName)
   ]);
-  onSubmit = _.partial(this.transitionPreventingDefault, 'submit');
+  onSubmit = _.partial(this.transitionPreventingDefault, 'next');
   onBack = _.partial(this.transitionPreventingDefault, 'back');
   onCancel = _.partial(this.transitionPreventingDefault, 'cancel');
   onAbandon = _.partial(this.transitionPreventingDefault, 'abandon');

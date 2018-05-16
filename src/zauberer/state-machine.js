@@ -13,7 +13,7 @@ const conditions = {
 const name = {
   on: {
     back: 'bridge',
-    submit: 'quest',
+    next: 'quest',
     cancel: 'bridge'
   }
 };
@@ -21,7 +21,7 @@ const name = {
 const quest = {
   on: {
     back: 'name',
-    submit: 'colour',
+    next: 'colour',
     cancel: 'bridge'
   }
 };
@@ -30,7 +30,7 @@ const colour = {
   on: {
     back: 'quest',
     abandon: 'name',
-    submit: {
+    next: {
       'success': { cond: conditions.valid },
       'failure': { cond: conditions.invalid }
     },
@@ -40,7 +40,7 @@ const colour = {
 
 const bridge = {
   on: {
-    submit: 'name'
+    next: 'name'
   }
 };
 
@@ -64,7 +64,7 @@ const zauberer = {
 
 const empty = {
   on: {
-    submit: {
+    next: {
       valid: { cond: conditions.valid },
       invalid: { cond: conditions.invalid }
     }
@@ -73,7 +73,7 @@ const empty = {
 
 const valid = {
   on: {
-    submit: {
+    next: {
       invalid: { cond: conditions.invalid }
     }
   }
@@ -81,7 +81,7 @@ const valid = {
 
 const invalid = {
   on: {
-    submit: {
+    next: {
       valid: { cond: conditions.valid }
     }
   }
