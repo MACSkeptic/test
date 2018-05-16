@@ -32,10 +32,11 @@ const Debugger = (props) => (
   </Page.MainBodySection>
 );
 
+const emptyData = () => ({ name: '', quest: '', colour: '' });
 export class State extends Component {
   state = {
     machine: machine.transition(machine, ''),
-    data: { name: '', quest: '', colour: '' }
+    data: emptyData()
   };
   transition = (eventName, { data } = {}) => (
     this.setState((state) => ({
@@ -43,11 +44,11 @@ export class State extends Component {
       machine: machine.transition(state.machine.value, { type: eventName, data }, state)
     }))
   );
+
   onChange = (name) => ({ target: { value } }) => (
-    this.transition('input', {
-      data: { [name]: value }
-    })
+    this.transition('input', { data: { [name]: value } })
   );
+
   transitionPreventingDefault = (stateMachineTransitionName, browserEvent) => ([
     _.invoke(browserEvent, 'preventDefault'),
     this.transition(stateMachineTransitionName)
@@ -56,6 +57,14 @@ export class State extends Component {
   onBack = _.partial(this.transitionPreventingDefault, 'back');
   onCancel = _.partial(this.transitionPreventingDefault, 'cancel');
   onAbandon = _.partial(this.transitionPreventingDefault, 'abandon');
+
+  componentDidUpdate = (previousProps, previousState) => (
+    (previousState.machine.actions !== this.state.machine.actions) &&
+    _.map(this.state.machine.actions, _.partial(_.invoke, this))
+  );
+
+  clearData = () => this.setState({ data: emptyData() });
+
   render = () => (
     <Page>
       <Page.Main>
