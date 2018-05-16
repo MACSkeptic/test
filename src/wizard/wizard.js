@@ -24,10 +24,11 @@ export const Wizard = ({ currentStep, ...rest }) => ({
   failure: (<Failure {...rest} />)
 }[currentStep] || (<Prism>{JSON.stringify(currentStep, null, '  ')}</Prism>));
 
+const emptyData = () => ({ name: '', quest: '', colour: '' });
 export class State extends Component {
   state = {
     currentStep: 'bridge',
-    data: { name: '', quest: '', colour: '' }
+    data: emptyData()
   };
   onChange = (name) => ({ target: { value } }) => (
     this.setState({
@@ -63,6 +64,7 @@ export class State extends Component {
     _.invoke(event, 'preventDefault');
     this.setState({ currentStep: 'name' });
   };
+  clearData = () => this.setState({ data: emptyData() });
   render = () => (
     <Page>
       <Page.Main>
