@@ -5,14 +5,38 @@ import { actions } from './actions';
 
 const Step3 = ({ onSubmit, onChange, onAbandon, data: { colour }, ...actionHandlers }) => (
   <Form onSubmit={onSubmit}>
-    <Form.Group label="What is your favourite colour?">
+    <Form.Group label="What is your favourite colour?" inline>
       <Form.Input
         onChange={onChange('colour')}
         checked={colour === 'purple'}
         type="radio"
         value="purple"
         name="colour"
-        label="purple"
+        label="💜"
+      />
+      <Form.Input
+        onChange={onChange('colour')}
+        checked={colour === 'yellow'}
+        type="radio"
+        value="yellow"
+        name="colour"
+        label="💛"
+      />
+      <Form.Input
+        onChange={onChange('colour')}
+        checked={colour === 'black'}
+        type="radio"
+        value="black"
+        name="colour"
+        label="🖤"
+      />
+      <Form.Input
+        onChange={onChange('colour')}
+        checked={colour === 'red'}
+        type="radio"
+        value="red"
+        name="colour"
+        label="❤️"
       />
       <Form.Input
         onChange={onChange('colour')}
@@ -20,7 +44,7 @@ const Step3 = ({ onSubmit, onChange, onAbandon, data: { colour }, ...actionHandl
         type="radio"
         value="blue"
         name="colour"
-        label="blue"
+        label="💙"
       />
       <Form.Input
         onChange={onChange('colour')}
@@ -28,7 +52,7 @@ const Step3 = ({ onSubmit, onChange, onAbandon, data: { colour }, ...actionHandl
         type="radio"
         value="green"
         name="colour"
-        label="green"
+        label="💚"
       />
     </Form.Group>
     {actions(actionHandlers)}

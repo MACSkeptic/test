@@ -205,3 +205,6 @@ input[name=graph]:not(:checked) ~
   opacity: 0 !important;
   background: hotpink;
 }
+.particles-input__input--meta-checkable {
+  top: 4px;
+}
