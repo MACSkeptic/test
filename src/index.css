@@ -187,8 +187,21 @@ html, body {
   box-shadow: hotpink 1px 1px 1px;
 }
 
+.particles-page__main-body-section {
+  transition: opacity 1s ease-in-out, background 2s;
+}
+.col {
+  transition: opacity 1s ease-in-out, background 2s;
+}
+.particles-page__main-body-section:not(:first-child),
+.particles-page__main-body-section:not(:first-child) .col:not(:first-child) {
+  background: white;
+}
 input[name=debugger]:not(:checked) ~
-  * .particles-page__main-body-section:not(:first-child) { opacity: 0 !important; }
+  * .particles-page__main-body-section:not(:first-child),
 input[name=graph]:not(:checked) ~
   * .particles-page__main-body-section:not(:first-child) 
-  .col:not(:first-child) { opacity: 0 !important; }
+  .col:not(:first-child) {
+  opacity: 0 !important;
+  background: hotpink;
+}
