@@ -21,8 +21,7 @@ export const Zauberer = ({ machine, ...rest }) => ({
 }[machine.value.zauberer] || (<Prism>{JSON.stringify(machine, null, '  ')}</Prism>));
 
 const Debugger = (props) => (
-  <Page.MainBodySection title="debugger">
-    <input type="checkbox" />
+  <Page.MainBodySection title={<label htmlFor="moreMagic">debugger</label>}>
     <Grid>
       <Grid.Cell xs={12} verticalGutters>
         <Prism>
@@ -65,7 +64,9 @@ export class State extends Component {
   render = () => (
     <Page>
       <Page.Main>
-        <Page.MainHeader withSections title="quest for the holy grail" />
+        <Page.MainHeader withSections title={<label htmlFor="magic">quest for the holy grail</label>} />
+        <input id="magic" name="debugger" type="checkbox" style={{ display: 'none' }} />
+        <input id="moreMagic" name="graph" type="checkbox" style={{ display: 'none' }} />
         <Page.MainBody>
           <Page.MainBodySection title={`step: ${this.state.machine.value.zauberer}`}>
             <Zauberer

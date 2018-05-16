@@ -187,4 +187,8 @@ html, body {
   box-shadow: hotpink 1px 1px 1px;
 }
 
-input[type=checkbox]:not(:checked) ~ .row { display: none !important; }
+input[name=debugger]:not(:checked) ~
+  * .particles-page__main-body-section:not(:first-child) { opacity: 0 !important; }
+input[name=graph]:not(:checked) ~
+  * .particles-page__main-body-section:not(:first-child) 
+  .col:not(:first-child) { opacity: 0 !important; }
