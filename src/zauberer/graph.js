@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 class Graph extends React.Component {
   constructor(props) {

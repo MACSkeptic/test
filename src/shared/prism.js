@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 const Prism = ({ children }) => (
   <pre>
     <code dangerouslySetInnerHTML={{ __html: window.Prism.highlight(children, window.Prism.languages.js) }} />

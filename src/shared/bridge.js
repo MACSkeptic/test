@@ -1,7 +1,5 @@
-import _ from 'lodash';
 import React from 'react';
 import { Form, Button } from '@janus.team/janus-particles';
-import { actions } from './actions';
 
 const Bridge = ({ onSubmit }) => (
   <Form onSubmit={onSubmit}>

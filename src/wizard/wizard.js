@@ -1,19 +1,9 @@
 import _ from 'lodash';
-import React, { Component, Fragment } from 'react';
-import { Grid, Page } from '@janus.team/janus-particles';
+import React, { Component } from 'react';
+import { Page } from '@janus.team/janus-particles';
 import { Prism, Success, Failure, Bridge, Step1, Step2, Step3 } from '../shared';
-
-const Debugger = (props) => (
-  <Page.MainBodySection title={<label htmlFor="moreMagic">debugger</label>}>
-    <Grid>
-      <Grid.Cell xs={12} verticalGutters>
-        <Prism>
-          {JSON.stringify(props, null, '  ')}
-        </Prism>
-      </Grid.Cell>
-    </Grid>
-  </Page.MainBodySection>
-);
+import Debugger from './debugger';
+import { empty } from '../shared/data';
 
 export const Wizard = ({ currentStep, ...rest }) => ({
   bridge: (<Bridge {...rest} />),
@@ -24,11 +14,14 @@ export const Wizard = ({ currentStep, ...rest }) => ({
   failure: (<Failure {...rest} />)
 }[currentStep] || (<Prism>{JSON.stringify(currentStep, null, '  ')}</Prism>));
 
-const emptyData = () => ({ name: '', quest: '', colour: '' });
+const isValid = ({ state: { data } }) => (
+  _.every(_.pick(data, ['name', 'quest', 'colour']))
+);
+
 export class State extends Component {
   state = {
     currentStep: 'bridge',
-    data: emptyData()
+    data: empty()
   };
   onChange = (name) => ({ target: { value } }) => (
     this.setState({
@@ -41,9 +34,7 @@ export class State extends Component {
       bridge: () => 'name',
       name: () => 'quest',
       quest: () => 'colour',
-      colour: () => (
-        _.every(_.pick(this.state.data, ['name', 'quest', 'colour'])) ? 'success' : 'failure'
-      )
+      colour: () => (isValid(this) ? 'success' : 'failure')
     }[this.state.currentStep]) || (() => this.state.currentStep))();
     this.setState({ currentStep });
   };
@@ -64,7 +55,7 @@ export class State extends Component {
     _.invoke(event, 'preventDefault');
     this.setState({ currentStep: 'name' });
   };
-  clearData = () => this.setState({ data: emptyData() });
+  clearData = () => this.setState({ data: empty() });
   render = () => (
     <Page>
       <Page.Main>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'font-awesome/css/font-awesome.css';
 import '@janus.team/janus-particles/dist/particles.css';
 import './index.css';

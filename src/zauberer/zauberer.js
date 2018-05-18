@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import React, { Component, Fragment } from 'react';
-import { machineConfiguration, machine } from './state-machine';
-import { Grid, Page } from '@janus.team/janus-particles';
+import React, { Component } from 'react';
+import { machine } from './state-machine';
+import { Page } from '@janus.team/janus-particles';
 import { Prism, Success, Failure, Bridge, Step1, Step2, Step3 } from '../shared';
-import Graph from './graph';
+import Debugger from './debugger';
+import { empty } from '../shared/data';
 
 export const Zauberer = ({ machine, ...rest }) => ({
   bridge: (<Bridge machine={machine} {...rest} />),
@@ -14,29 +15,10 @@ export const Zauberer = ({ machine, ...rest }) => ({
   failure: (<Failure machine={machine} {...rest} />)
 }[machine.value.zauberer] || (<Prism>{JSON.stringify(machine, null, '  ')}</Prism>));
 
-const Debugger = (props) => (
-  <Page.MainBodySection title={<label htmlFor="moreMagic">debugger</label>}>
-    <Grid>
-      <Grid.Cell xs={12} verticalGutters>
-        <Prism>
-          {JSON.stringify(_.pick(props, ['data', 'machine.value', 'machine.actions']), null, '  ')}
-        </Prism>
-      </Grid.Cell>
-      <Grid.Cell xs={7} verticalGutters>
-        <Graph machine={machineConfiguration.states.zauberer} />
-      </Grid.Cell>
-      <Grid.Cell xs={5} verticalGutters>
-        <Graph machine={machineConfiguration.states.data} />
-      </Grid.Cell>
-    </Grid>
-  </Page.MainBodySection>
-);
-
-const emptyData = () => ({ name: '', quest: '', colour: '' });
 export class State extends Component {
   state = {
     machine: machine.transition(machine, ''),
-    data: emptyData()
+    data: empty()
   };
   transition = (eventName, { data } = {}) => (
     this.setState((state) => ({
@@ -63,7 +45,7 @@ export class State extends Component {
     _.map(this.state.machine.actions, _.partial(_.invoke, this))
   );
 
-  clearData = () => this.setState({ data: emptyData() });
+  clearData = () => this.setState({ data: empty() });
 
   render = () => (
     <Page>
